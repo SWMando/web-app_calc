@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block contents %}
+<table class="table table-bordered border-black">
+	<thead>
+		<tr>
+			<th scope="col">Operations</th>
+			<th>Signs</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for key,value in operations.items() %}
+		<tr>
+			<td>{{ key }}</td>
+			<td>{{ value }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<form action="{{ url_for("calculator")}}" method="post">
+	<label for="num1">Please enter 1st number:</label>
+	<span><input type="text" id="num1" name="num1"></span>
+	<br>
+	<label for="num2">Please enter 2nd number:</label>
+	<span><input type="text" id="num2" name="num2"></span>
+	<br>
+	<label for="opr">Please choose and enter an operation to execute</label>
+	<input type="text" id="opr" name="opr">
+	<br>
+	<button type="submit">Submit</button>
+</form>
+{% if output != None %}
+<h4>Your Result:</h4>
+<p>{{ output | safe }}</p>
+{% else %}
+<strong>{{ errormsg | upper }}</strong>
+{% endif %}
+{% endblock %}
